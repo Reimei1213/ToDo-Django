@@ -1,0 +1,15 @@
+<ul>
+    <li>タスク : {{ task.getName }}</li>
+
+    <li>状態 : {{ task.getStatusName }}</li>
+
+    {% if task.getMemo %}
+        <li>メモ : {{ task.getMemo }}</li>
+    {% endif %}
+
+    <li>開始日時 : {{ task.getStartTime }}</li>
+
+    <li>終了日時 : {{ task.getEndTime }}</li>
+</ul>
+
+<a href="{% url 'todos:delete' task.getId %}"><button type="button">削除</button></a>

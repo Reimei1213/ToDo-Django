@@ -11,4 +11,3 @@
 - オブジェクト指向を意識して、モデルにメソッドを設定
 - Views.pyのpostメソッドではREST APIっぽい実装
 
-# ToDo-Django

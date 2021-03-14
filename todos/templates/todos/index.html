@@ -1,0 +1,63 @@
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h1>タスク</h1>
+{% if taskList %}
+    <form action="{% url 'todos:changeStatus' %}" method="POST">{% csrf_token %}
+        <h2>ToDo</h2>
+        <ul>
+            {% for task in taskList %}
+                {% if task.isToDo %}
+                    <li class="js-taskId" data-task-id={{ task.getId }} >
+                        <a href="{% url 'todos:detail' task.getId %}">{{ task.getName }}</a>
+                        <input type="submit" class="js-submit" value="Doing">
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h2>Doing</h2>
+        <ul>
+            {% for task in taskList %}
+                {% if task.isDoing %}
+                    <li class="js-taskId" data-task-id={{ task.getId }}>
+                        <a href="{% url 'todos:detail' task.getId %}">{{ task.getName }}</a>
+                        <input type="submit" class="js-submit" value="Done">
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h2>Done</h2>
+        <ul>
+            {% for task in taskList %}
+                {% if task.isDone %}
+                    <li>
+                        <a href="{% url 'todos:detail' task.getId %}">{{ task.getName }}</a>
+                        <a href="{% url 'todos:delete' task.getId %}"><button type="button">削除</button></a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {{form.status.as_hidden}}
+        {{form.todoId.as_hidden}}
+    </form>
+{% endif %}
+
+<a href="{% url 'todos:post' %}"><button type="button">追加</button></a>
+
+
+<script>
+    $(function(){
+        $('.js-submit').on('click', function(){
+            const STATUS = {
+                'Doing': 1,
+                'Done': 2
+            };
+            let statusButtonVal = $('.js-submit').val();
+            let taskId = $('.js-submit').closest('.js-taskId').attr('data-task-id');
+
+            $('#id_todoId').val(taskId);
+            $('#id_status').val(STATUS[statusButtonVal]);
+        });
+    });
+</script>
