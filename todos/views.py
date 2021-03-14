@@ -26,7 +26,6 @@ def post(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         memo = request.POST.get('memo')
-        # return render(request, 'todos/post.html', {'name':name, 'memo': memo})
         task = Task()
         task.create()
         task.setName(name)
