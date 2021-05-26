@@ -1,5 +1,5 @@
 # ToDo-Django
-aaaaaaaaaaaaaaaaaaaa
+
 ## 環境
 - Django: 3.1.7
 - Python: 3.7.4
